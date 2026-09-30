@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { authApi } from "../../api/auth";
-import type { GreenApiCredentials } from "../../types/api";
 import type { AuthStep } from "../../../features/auth/types/auth-step";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../app/store/auth.store";
+import type { GreenApiCredentials } from "../../types/api";
+import { useCredentialsStore } from "../../../app/store/credentials.store";
 
 export const useAuthLogic = () => {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
+  const credentials = useCredentialsStore((state) => state.credentials);
+  const setCredentials = useCredentialsStore((state) => state.setCredentials);
   const [step, setStep] = useState<AuthStep>("credentials");
-  const [credentials, setCredentials] = useState<GreenApiCredentials | null>(
-    null,
-  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -88,5 +88,12 @@ export const useAuthLogic = () => {
     }
   };
 
-  return {step, loading, error, handleCredentialsSubmit, handlePhoneSubmit, handleCodeSubmit}
+  return {
+    step,
+    loading,
+    error,
+    handleCredentialsSubmit,
+    handlePhoneSubmit,
+    handleCodeSubmit,
+  };
 };

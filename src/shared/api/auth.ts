@@ -1,3 +1,4 @@
+import { getInstancePath } from "../config/env";
 import type { GreenApiCredentials } from "../types/api";
 import { axiosClient } from "./axios";
 
@@ -29,9 +30,6 @@ interface SendAuthorizationCodeResponse {
     reason?: string;
   };
 }
-
-const getInstancePath = (credentials: GreenApiCredentials) =>
-  `/waInstance${credentials.idInstance}`;
 
 export const authApi = {
   async getStateInstance(
