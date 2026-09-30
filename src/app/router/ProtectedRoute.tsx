@@ -1,18 +1,11 @@
-import {
-  Navigate,
-  Outlet,
-  useLocation,
-} from 'react-router-dom';
-import { useAuthStore } from '../store/auth.store';
-
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuthStore } from "../store/auth.store";
 
 export function ProtectedRoute() {
-  const credentials = useAuthStore(
-    (state) => state.credentials,
-  );
+  const credentials = useAuthStore((state) => state.isAuthenticated);
 
   const location = useLocation();
-console.log(credentials);
+  console.log(credentials);
 
   if (!credentials) {
     return (
